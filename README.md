@@ -1,34 +1,20 @@
-# vue-stock-market
+## Projeto Front-end 
 
-## Project setup
-```
-yarn install
-```
 
-### Compiles and hot-reloads for development
-```
-yarn run serve
-```
+### Objetivo: 
+- Promover o melhor entendimento do time no front-end, vue, vuex, routes, rest e teste.
+- Com o projeto finalizado utiliza-lo para consulta.
 
-### Compiles and minifies for production
-```
-yarn run build
-```
+### Tarefas.
+- Trabalhar com versionamento, fluxo e code review;
+- Utilizar como base, projeto do udemy;
+- Utilizar TS;
+- CSS – buma;
+- Criação de mocks,  com fake js.
+- JS – família vue;
+- Testes;
 
-### Run your tests
-```
-yarn run test
-```
 
-### Lints and fixes files
-```
-yarn run lint
-```
+## TODOs
 
-### Run your unit tests
-```
-yarn run test:unit
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+[ ]  Retirar no ts lint, erro para extensão do .vue
