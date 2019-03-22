@@ -22,7 +22,7 @@ import { Vue, Component } from 'vue-property-decorator';
 @Component({})
 export default class Stock extends Vue {
 
-};
+}
 </script>
 
 <style>
