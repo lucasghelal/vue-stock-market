@@ -11,6 +11,7 @@
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
 import Header from '@/components/Header.vue';
+import stocks from '@/data/stocks';
 
 
 @Component({
@@ -20,7 +21,7 @@ import Header from '@/components/Header.vue';
 })
 export default class App extends Vue {
   created() {
-    this.$store.dispatch('initStocks');
+    this.$store.dispatch('stocks/initStocks', stocks);
   }
 }
 </script>

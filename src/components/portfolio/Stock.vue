@@ -1,19 +1,23 @@
 <template>
   <div class="column is-4">
     <div class="card">
-      <div class="card-header has-background-success">
+      <div class="card-header has-background-info">
         <p class="card-header-title">
-          <strong>{{ stock.empresa }} <small>(Preço: {{ stock.valor }})</small></strong>
+          <strong>{{ stock.empresa }} 
+            <small>
+              (Preço: {{ stock.valor }} | Qtde: {{ stock.quantidade }})
+            </small>
+          </strong>
         </p>
       </div>
       <div class="card-content">
         <div class="content">
           <b-field grouped>
-            <b-input expanded placeholder="Quantidade" type="number" v-model.number="quantidade"></b-input>
+            <b-input expanded placeholder="Quantidade" type="number" v-model="quantidade"></b-input>
             <p class="control">
-              <button class="button is-success"
-                @click="buyStock"
-                :disabled="quantidade <= 0">Comprar</button>
+              <button class="button is-info"
+                @click="sellStock"
+                :disabled="quantidade <= 0">Vender</button>
             </p>
           </b-field>
         </div>
@@ -26,24 +30,22 @@
 import { Vue, Component, Prop } from 'vue-property-decorator';
 import { Action, namespace } from 'vuex-class';
 
-const stocksModule = namespace('stocks');
+const portfolio = namespace('portfolio');
 
 @Component({})
 export default class Stock extends Vue {
   @Prop() stock!: any;
-  @stocksModule.Action('buyStock') buyStockAction;
+  @portfolio.Action('sellStock') sellStockAction;
 
-  quantidade: Number = 0;
+  private quantidade: number = 0;
 
-  buyStock() {
+  sellStock() {
     const order = {
       stockId: this.stock.id,
       stockPrice: this.stock.valor,
       quantidade: this.quantidade,
     };
-
-    this.buyStockAction(order);
-    this.quantidade = 0;
+    this.sellStockAction(order);
   }
 }
 </script>

@@ -2,20 +2,21 @@ import stocks from '@/data/stocks'
 
 
 export default {
+    namespaced: true,
     state: {
-        stock: []
+        stocks: []
     },
     mutations: {
         setStocks(state, stocks) {
-            state.stocks = stocks
+            state.stocks = stocks;
         }
     },
     actions: {
         buyStock({ commit }, order) {
-            commit()
+            commit('portfolio/buyStock', order, { root: true });
         },
         initStocks({ commit }) {            
-            commit('setStocks', stocks)
+            commit('setStocks', stocks);
         }
     },
     getters: {

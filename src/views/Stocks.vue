@@ -15,7 +15,7 @@ import Stock from '@/components/market/Stock.vue';
 })
 export default class Stocks extends Vue {
   get stocks() {
-    return this.$store.getters.stocks;
+    return this.$store.getters['stocks/stocks'];
   }
 }
 </script>
