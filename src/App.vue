@@ -19,7 +19,9 @@ import Header from '@/components/Header.vue';
   },
 })
 export default class App extends Vue {
-
+  created() {
+    this.$store.dispatch('initStocks');
+  }
 }
 </script>
 
