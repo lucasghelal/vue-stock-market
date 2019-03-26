@@ -33,7 +33,7 @@ export default class Stock extends Vue {
   @Prop() stock!: any;
   @stocksModule.Action('buyStock') buyStockAction;
 
-  quantidade: Number = 0;
+  quantidade: number = 0;
 
   buyStock() {
     const order = {
