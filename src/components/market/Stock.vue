@@ -9,11 +9,11 @@
       <div class="card-content">
         <div class="content">
           <b-field grouped>
-            <b-input expanded placeholder="Quantidade" type="number" v-model.number="quantidade"></b-input>
+            <b-input expanded placeholder="Quantidade" step="any" type="number" v-model.number="quantidade"></b-input>
             <p class="control">
               <button class="button is-success"
                 @click="buyStock"
-                :disabled="quantidade <= 0">Comprar</button>
+                :disabled="quantidade <= 0 || !Number.isInteger(quantidade)">Comprar</button>
             </p>
           </b-field>
         </div>

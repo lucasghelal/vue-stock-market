@@ -1,6 +1,3 @@
-import stocks from '@/data/stocks';
-
-
 export default {
   namespaced: true,
   state: {
