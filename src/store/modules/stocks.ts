@@ -10,6 +10,11 @@ export default {
         setStocks(state, stocks) {
             state.stocks = stocks;
         },
+        randomizeStocks(state) {
+            state.stocks.forEach((stock) => {
+                stock.valor = Math.round(stock.valor * (1 + Math.random() - 0.45));
+            });
+        },
     },
     actions: {
         buyStock({ commit }, order) {
@@ -17,6 +22,9 @@ export default {
         },
         initStocks({ commit }) {
             commit('setStocks', stocks);
+        },
+        randomizeStocks({ commit }) {
+            commit('randomizeStocks');
         },
     },
     getters: {

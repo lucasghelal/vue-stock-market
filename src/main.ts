@@ -5,11 +5,16 @@ import router from './router';
 import store from './store/store';
 import './registerServiceWorker';
 import 'buefy/dist/buefy.css';
+import '@fortawesome/fontawesome-free/css/all.css';
 
 
 Vue.config.productionTip = false;
 
 Vue.use(Buefy);
+
+Vue.filter('currency', (valor) => {
+  return 'R$ ' + valor.toLocaleString('pt-br');
+});
 
 new Vue({
   router,

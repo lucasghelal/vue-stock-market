@@ -3,17 +3,25 @@
     <div class="card">
       <div class="card-header has-background-success">
         <p class="card-header-title">
-          <strong>{{ stock.empresa }} <small>(Preço: {{ stock.valor }})</small></strong>
+          <strong>{{ stock.empresa }} <small>(Preço: {{ stock.valor | currency }})</small></strong>
         </p>
       </div>
       <div class="card-content">
         <div class="content">
-          <b-field grouped>
-            <b-input expanded placeholder="Quantidade" step="any" type="number" v-model.number="quantidade"></b-input>
+          <b-field grouped :type="insuficcientFunds || quantidade < 0 || !Number.isInteger(quantidade) ? 'is-danger' : ''">
+            <b-input 
+              expanded 
+              placeholder="Quantidade" 
+              step="any" 
+              type="number" 
+              v-model.number="quantidade">
+            </b-input>
             <p class="control">
               <button class="button is-success"
                 @click="buyStock"
-                :disabled="quantidade <= 0 || !Number.isInteger(quantidade)">Comprar</button>
+                :disabled="insuficcientFunds || quantidade <= 0 || !Number.isInteger(quantidade)">
+                {{ insuficcientFunds ? "Insuficiente": "Comprar" }}
+              </button>
             </p>
           </b-field>
         </div>
@@ -34,6 +42,14 @@ export default class Stock extends Vue {
   @stocksModule.Action('buyStock') buyStockAction;
 
   quantidade: number = 0;
+
+  get funds() {
+    return this.$store.getters['portfolio/funds'];
+  }
+
+  get insuficcientFunds() {
+    return (this.quantidade * this.stock.valor) > this.funds;
+  }
 
   buyStock() {
     const order = {

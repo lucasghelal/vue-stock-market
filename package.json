@@ -9,6 +9,7 @@
     "test:unit": "vue-cli-service test:unit"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.8.1",
     "buefy": "^0.7.3",
     "bulma": "^0.7.4",
     "register-service-worker": "^1.6.2",
