@@ -32,7 +32,7 @@
         <a class="navbar-link">Salvar & Carregar</a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item">
+          <a class="navbar-item" @click="saveData">
             Salvar Dados
           </a>
           <a class="navbar-item">
@@ -50,6 +50,7 @@
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
 import { namespace } from 'vuex-class';
+import AxiosHttp from '@/plugins/axios';
 
 const portfolio = namespace('portfolio');
 const stocks = namespace('stocks');
@@ -61,6 +62,15 @@ export default class Header extends Vue {
 
   finalizarDia() {
     this.randomizeStocks();
+  }
+
+  saveData() {
+    const {
+      'portfolio/stockPortifolio': stockPortifolio,
+      'portfolio/funds': funds,
+      'stocks/stocks': stocks,
+    } = this.$store.getters;
+    this.$http.put('data', { stockPortifolio, funds, stocks});
   }
 }
 </script>
