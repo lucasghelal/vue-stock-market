@@ -35,7 +35,7 @@
           <a class="navbar-item" @click="saveData">
             Salvar Dados
           </a>
-          <a class="navbar-item">
+          <a class="navbar-item" @click="loadDataLocal">
             Carregar Dados
           </a>
         </div>
@@ -49,8 +49,9 @@
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
-import { namespace } from 'vuex-class';
+import { namespace, Action } from 'vuex-class';
 import AxiosHttp from '@/plugins/axios';
+import actions from '@/store/actions';
 
 const portfolio = namespace('portfolio');
 const stocks = namespace('stocks');
@@ -58,6 +59,7 @@ const stocks = namespace('stocks');
 @Component({})
 export default class Header extends Vue {
   @portfolio.Getter funds;
+  @Action loadData;
   @stocks.Action randomizeStocks;
 
   finalizarDia() {
@@ -66,12 +68,17 @@ export default class Header extends Vue {
 
   saveData() {
     const {
-      'portfolio/stockPortifolio': stockPortifolio,
+      'portfolio/stocksPortfolio': stocksPortfolio,
       'portfolio/funds': funds,
       'stocks/stocks': stocks,
     } = this.$store.getters;
-    this.$http.put('data', { stockPortifolio, funds, stocks});
+    this.$http.put('data', { stocksPortfolio, funds, stocks});
   }
+
+  loadDataLocal() {
+    this.loadData();
+  }
+
 }
 </script>
 

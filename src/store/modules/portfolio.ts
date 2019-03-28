@@ -28,6 +28,10 @@ export default {
       }
       state.funds += stockPrice * quantidade;
     },
+    setPortfolio(state, portfolio) {
+      state.funds = portfolio.funds;
+      state.stocks = portfolio.stocksPortfolio || [];
+    },
   },
   actions: {
     sellStock({commit}, order ) {
@@ -35,7 +39,7 @@ export default {
     },
   },
   getters: {
-    stockPortifolio(state, getters, rootState, rootGetters) {
+    stocksPortfolio(state, getters, rootState, rootGetters) {
       return state.stocks.map((stock) => {
         const record = rootGetters['stocks/stocks'].find((element) => element.id === stock.id);
         return {

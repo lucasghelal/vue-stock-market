@@ -1,14 +1,15 @@
-var faker = require("faker");
-
-module.exports = function() {
-  var stocks = [];
-  var user = [];
-  var data = {};
+const faker = require("faker");
 
 
-  for (var i = 0; i < 100; i++) {
+function fakeDataStock() {
+  const stocks = [];
+  const user = [];
+  const data = {};
+
+
+  for (let i = 0; i < 100; i++) {
     stocks.push({
-      id: i,
+      id: faker.random.uuid(),
       empresa: faker.company.companyName(),
       valor: faker.commerce.price(),
     });
@@ -24,3 +25,5 @@ module.exports = function() {
     data
   };
 };
+
+module.exports = fakeDataStock;

@@ -17,7 +17,7 @@ const portfolio = namespace('portfolio');
   },
 })
 export default class Stocks extends Vue {
-  @portfolio.Getter('stockPortifolio') stocks;
+  @portfolio.Getter('stocksPortfolio') stocks;
 }
 </script>
 
