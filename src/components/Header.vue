@@ -1,7 +1,7 @@
 <template>
     <nav class="navbar" role="navigation" aria-label="main navigation">
   <div class="navbar-brand">
-    <span style="margin: auto;"><strong>Stock</strong>Market</span>
+    <span style="margin: auto;" class="has-text-weight-light"><strong>Stock</strong>Market</span>
 
     <a role="button" class="navbar-burger burger" aria-label="menu" aria-expanded="false" data-target="navbarBasicExample">
       <span aria-hidden="true"></span>
@@ -26,20 +26,22 @@
     </div>
 
     <div class="navbar-end">
-      <a class="navbar-item">Finalizar Dia</a>
+      <a class="navbar-item" @click="finalizarDia">Finalizar Dia</a>
 
       <div class="navbar-item has-dropdown is-hoverable">
         <a class="navbar-link">Salvar & Carregar</a>
 
         <div class="navbar-dropdown">
-          <a class="navbar-item">
+          <a class="navbar-item" @click="saveData">
             Salvar Dados
           </a>
-          <a class="navbar-item">
+          <a class="navbar-item" @click="loadDataLocal">
             Carregar Dados
           </a>
         </div>
       </div>
+
+      <span class="navbar-item">Seu saldo: {{ funds | currency }}</span>
     </div>
   </div>
 </nav>    
@@ -47,9 +49,35 @@
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
+import { namespace, Action } from 'vuex-class';
+import AxiosHttp from '@/plugins/axios';
+import actions from '@/store/actions';
+
+const portfolio = namespace('portfolio');
+const stocks = namespace('stocks');
 
 @Component({})
 export default class Header extends Vue {
+  @portfolio.Getter funds;
+  @Action loadData;
+  @stocks.Action randomizeStocks;
+
+  finalizarDia() {
+    this.randomizeStocks();
+  }
+
+  saveData() {
+    const {
+      'portfolio/stocksPortfolio': stocksPortfolio,
+      'portfolio/funds': funds,
+      'stocks/stocks': stocks,
+    } = this.$store.getters;
+    this.$http.put('data', { stocksPortfolio, funds, stocks});
+  }
+
+  loadDataLocal() {
+    this.loadData();
+  }
 
 }
 </script>

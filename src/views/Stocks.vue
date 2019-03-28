@@ -1,12 +1,12 @@
 <template>
-  <div>
-    <Stock v-for="stock in stocks" :key="stock.id"></Stock>
+  <div class="columns is-multiline">
+    <Stock v-for="stock in stocks" :key="stock.id" :stock="stock"></Stock>
   </div>
 </template>
 
 <script lang='ts'>
 import { Vue, Component } from 'vue-property-decorator';
-import Stock from '@/components/market/Stock';
+import Stock from '@/components/market/Stock.vue';
 
 @Component({
   components: {
@@ -14,13 +14,9 @@ import Stock from '@/components/market/Stock';
   },
 })
 export default class Stocks extends Vue {
-  private stocks: object[] = [
-    {id: 1, empresa: 'OI', valor: 100},
-    {id: 2, empresa: 'TIM', valor: 200},
-    {id: 3, empresa: 'CLARO', valor: 300},
-    {id: 4, empresa: 'VIVO', valor: 400},
-    {id: 5, empresa: 'MORTO', valor: 500},
-  ];
+  get stocks() {
+    return this.$store.getters['stocks/stocks'];
+  }
 }
 </script>
 
