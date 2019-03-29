@@ -9,7 +9,7 @@
 - Trabalhar com versionamento, fluxo e code review;
 - Utilizar como base, projeto do udemy;
 - Utilizar TS;
-- CSS – buma;
+- CSS – Bulma;
 - Criação de mocks,  com fake js.
 - JS – família vue;
 - Testes;
